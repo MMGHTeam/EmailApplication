@@ -1,5 +1,7 @@
 package mim.mmgh;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -73,21 +75,6 @@ public class Email {
         return password;
     }
 
-    // generate farsi password method
-    private String generateFarsiPassword(int length) {
-        Random rnd = new Random();
-        String Capitals = "آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی";
-        String smalls = "أإبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی";
-        String numbers = "0123456789";
-        String special = "!@#$%&?";
-        String values = Capitals + smalls + numbers + special;
-        String password = "";
-        for (int i = 0; i < length; i++) {
-            password += values.charAt(rnd.nextInt(values.length()));
-        }
-        return password;
-    }
-
     // change password method
     public void changePassword() {
         boolean flag = false;
@@ -120,14 +107,14 @@ public class Email {
         System.out.println("current capacity: " + this.mailboxCapacity);
         System.out.println("Enter new capacity: ");
         this.mailboxCapacity = sc.nextInt();
-        System.out.println("Capacity changed to " + this.mailboxCapacity + "successfully!");
+        System.out.println("Capacity changed to " + this.mailboxCapacity + " successfully!");
     }
 
     // set alternate email method + email validation method
     public void setAlternateEmail() {
         System.out.println("Enter new alternate email: ");
+        this.alternateEmail = sc.next();
         if (this.alternateEmail.contains("@")) {
-            this.alternateEmail = sc.next();
             System.out.println("Alternate email changed to " + this.alternateEmail + "successfully!");
         } else {
             System.out.println("Invalid email, try again!");
@@ -145,6 +132,37 @@ public class Email {
         System.out.println("Password: " + this.password);
         System.out.println("Mailbox Capacity: " + this.mailboxCapacity);
         System.out.println("Alternate Email: " + this.alternateEmail);
+    }
+    //Store in File method
+    public void storeFile(){
+        try {
+            FileWriter fw = new FileWriter("C:\\Users\\User\\Desktop\\Employee.txt", true);
+            fw.write("First Name: " + this.fname + "\n");
+            fw.append("Last Name: " + this.lname + "\n");
+            fw.append("Department: " + this.dept + "\n");
+            fw.append("Email: " + this.email + "\n");
+            fw.append("Password: " + this.password + "\n");
+            fw.append("Mailbox Capacity: " + this.mailboxCapacity + "\n");
+            fw.append("Alternate Email: " + this.alternateEmail + "\n");
+            fw.close();
+            System.out.println("Employee details stored in file successfully!");
+        }catch (Exception e){
+            System.out.println("Error: " + e.getStackTrace());
+        }
+    }
+    //Read from File method
+    public void readFile(){
+        try {
+            FileReader fr = new FileReader("C:\\Users\\User\\Desktop\\Employee.txt");
+            int i;
+            while ((i = fr.read()) != -1) {
+                System.out.print((char) i);
+            }
+            fr.close();
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getStackTrace());
+        }
     }
 
 }
