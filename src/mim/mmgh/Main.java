@@ -12,7 +12,7 @@ public class Main {
         Email email = new Email(f_name, l_name);
         int choice = -1;
         do {
-            System.out.println("\n ****** \n Enter choice: \n 1. Show Info \n 2. Change password \n 3. Change Mailbox capacity \n 4. Set Alternate email \n 5. Store in file \n 6. Read from file \n 7. Exit ******");
+            System.out.println("\n ****** \n Enter choice: \n 1. Show Info \n 2. Change password \n 3. Change Mailbox capacity \n 4. Set Alternate email \n 5. Store in file \n 6. Read from file \n 7. Exit \n ******");
             choice = sc.nextInt();
             switch (choice) {
                 case 1:
